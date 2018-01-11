@@ -25,12 +25,35 @@
         console.log(item.name + ' is ' + item.value );
       })
       console.log(data);
-      fn(data);
-      this.reset();
-      this.elements[0].focus();
+      fn(data).then(function(){
+        this.reset();
+        this.elements[0].focus();
+      }.bind(this));
 
     });
   };
+
+  FormHandler.prototype.addInputHandler = function (fn) {
+    console.log('enter setting input handler for the form');
+    this.$formElement.on('input', '[name="emailAddress"]', function(event) {
+
+      var emailAddress = event.target.value;
+      //console.log('Input Email Address...' + emailAddress);
+      //console.log(fn(emailAddress));
+
+      var message = '';
+
+      if (fn(emailAddress)) {
+        event.target.setCustomValidity('');
+      }else {
+        message = emailAddress + ' is not a valid email address';
+        event.target.setCustomValidity(message);
+
+      }
+
+    })
+  }
+
 
   App.FormHandler = FormHandler;
   window.App = App;
