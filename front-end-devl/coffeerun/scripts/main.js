@@ -37,7 +37,9 @@
   });
 
   formHandler.addInputHandler(Validation.isCompanyEmail);
-
+  myTruck.printOrders(checkList.addRow.bind(checkList));
+  webshim.polyfill('forms forms-ext');
+  webshim.setOptions('forms {addValidators: true, lazyCustomMessages: true}');
 
   //console.log(formHandler);
 
