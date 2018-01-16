@@ -25,4 +25,5 @@ var server = http.createServer(function (req, res) {
   })
 
 });
+console.log('web server listening port 3000')
 server.listen(3000);
