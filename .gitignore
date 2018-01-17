@@ -3,7 +3,6 @@ bootstrap
 jquery
 node_modules
 favicon.ico
-package.json
 *.log
 *.bak
 libs
