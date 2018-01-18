@@ -50,6 +50,7 @@
     "jshit": "0.0.1",
     "jsonwebtoken": "^7.4.3",
     "mocha": "^3.5.0",
+    "moment": "^2.20.1",
     "mongoose": "^4.11.9",
     "morgan": "^1.8.2",
     "nodemailer": "^4.1.0",
