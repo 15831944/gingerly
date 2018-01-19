@@ -2,6 +2,7 @@
 bootstrap
 jquery
 node_modules
+bower_components
 favicon.ico
 *.log
 *.bak
