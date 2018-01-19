@@ -6,7 +6,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var zw_db = require ('./app_server/models/db');
+
 var index = require('./app_server/routes/index');
+
+
+var loc8rRoutes = require('./app_server/loc8r/routes/index');
+var loc8rApiRoutes = require('./app_server/loc8r/api/routes/index');
+
 var users = require('./app_server/routes/users');
 
 var app = express();
@@ -22,7 +29,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.get('/', function (req, res) {  res.send('Hello World!')})
 //app.get('/', (req, res) =>res.send('Hello Express'));
 app.use('/', index);
-app.use('users', users);
+app.use('/loc8r', loc8rRoutes);
+app.use('/api/loc8r', loc8rApiRoutes);
+
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
