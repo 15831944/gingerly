@@ -59,7 +59,8 @@ module.exports.locationsListByDistance = function(req, res) {
     };
     var geoOptions  = {
       spherical: true,
-      maxDistance: convertDis.getRadsFromDistance(20),
+      //maxDistance: convertDis.getRadsFromDistance(700000000),
+      maxDistance: 700000,
       num: 10
     };
     if (!lng || !lat) {
@@ -68,11 +69,23 @@ module.exports.locationsListByDistance = function(req, res) {
       });
     }
 
+    console.log ("lng:" + lng);
+    console.log ("lat" + lat);
+    console.log ("max" + geoOptions.maxDistance);
+
     Loc.geoNear(point, geoOptions, function(err, results, status) {
+      console.log("results" + results);
+      console.log("status" +status);
+      console.log("err" + err);
       var locations = [];
       if (err) {
+        console.log("err " + err);
         sendJsonReponse(res, 404, err);
       }else {
+        console.log("processing results " + results.length);
+        console.log("results 0 " + results[0].toString());
+        console.log("results 0 name" + results[0].obj.name);
+        console.log("results 0 distance" + results[0].dis);
         results.forEach(function (doc){
           locations.push({
             distance: convertDis.getDistanceFromRads(doc.dis),
@@ -83,9 +96,11 @@ module.exports.locationsListByDistance = function(req, res) {
             _id: doc.obj._id
           });
         });
+        sendJsonReponse(res, 200, locations);
       }
 
     });
+
 };
 
 module.exports.locationsReadOne = function(req, res) {
@@ -165,7 +180,7 @@ module.exports.locationsDeleteOne = function(req, res) {
     var locationid = req.params.locationid;
     if (locationid) {
       Loc
-        .findByIdAndRemove(locationid) 
+        .findByIdAndRemove(locationid)
         .exec (
           function(err, location) {
             if (err) {

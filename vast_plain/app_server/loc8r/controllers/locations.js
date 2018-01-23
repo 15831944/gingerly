@@ -32,12 +32,12 @@ var renderHomepage = function(req, res, responseBody) {
     }
   }
   res.render('loc8r/locations-list', {
-    title: 'Home Loc8r Home',
+    title: 'Loc8r',
     pageHeader : {
           title: 'Loc8r',
           strapline: 'find the best resources to work with'
         },
-    sidebar: "Always look for the best projects to work from end to end",
+    sidebar: "Always look for the best projects to work",
     locations: responseBody,
     message: message
   });
@@ -45,16 +45,23 @@ var renderHomepage = function(req, res, responseBody) {
 
 module.exports.homelist = function(req, res) {
   var requestOptions, path;
-  path = '/api/loc8r';
+  path = '/api/loc8r/locations';
   console.log("homelist calling api " + apiOptions.server+path);
   options = {
-    url: 'http://localhost:3000/'
+    url:   apiOptions.server + path,
+    method: "GET",
+    json: {},
+    qs: {
+      lng: -0.9692599,
+      lat: 51.4558091,
+      maxDistance: 700000
+    }
   };
 
   request(
     options,
     function(err, response, body) {
-      console.log('satuscode:'+response.statusCode);
+      //console.log('satuscode:'+ response.statusCode);
       console.log('body' + body);
       console.log('error' + err);
       var i, data;
@@ -69,9 +76,42 @@ module.exports.homelist = function(req, res) {
 
 };
 
-module.exports.locationInfo = function(req, res) {
-  res.render('loc8r/location-info', {title: 'Location Info'});
+var renderDetailPage = function(req, res, locDetail) {
+  res.render('loc8r/location-info', {
+    title: locDetail.name,
+    pageHeader: {title: locDetail.name},
+    sidebar: {
+      context: ' is on Loc8r because it has the excellent skillsets'
+    },
+    location: locDetail
+  });
 }
+module.exports.locationInfo = function(req, res) {
+  var requestOptions, path;
+  path = '/api/loc8r/locations/' + req.params.locationid;
+  requestOptions = {
+    url: apiOptions.server + path,
+    method: "GET",
+    json: {}
+  };
+  request (
+    requestOptions,
+    function(err, response, body) {
+      var data = body;
+      data.coods = {
+        lng: body.coords[0],
+        lat: body.coords[1]
+      };
+      renderDetailPage(req, res, data);
+    }
+  )
+
+}
+
+module.exports.doAddReview = function(req, res) {
+  //res.render('loc8r/location-review-form', {title: 'Add Review'});
+}
+
 module.exports.addReview = function(req, res) {
   res.render('loc8r/location-review-form', {title: 'Add Review'});
 }
