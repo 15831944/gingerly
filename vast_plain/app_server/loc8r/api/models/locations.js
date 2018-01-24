@@ -8,9 +8,9 @@ var openingTimeSchema = new mongoose.Schema({
 });
 
 var reviewSchema = new mongoose.Schema({
-  author: String,
+  author: {type: String, required: true}
   rating: {type: Number, required: true, min:0, max: 5},
-  reviewText: String,
+  reviewText: {type: String, required: true},
   createdOn: {type: Date, "default": Date.now}
 });
 
@@ -23,6 +23,5 @@ var locationSchema = new mongoose.Schema({
   openingTimes: [openingTimeSchema],
   reviews: [reviewSchema]
 });
-
 
 mongoose.model("Location", locationSchema);

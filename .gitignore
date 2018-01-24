@@ -8,7 +8,6 @@ favicon.ico
 *.bak
 *.lock
 
-public
 libs
 images
 bin

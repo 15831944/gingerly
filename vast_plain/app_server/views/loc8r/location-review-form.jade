@@ -6,7 +6,9 @@ block content
       h1 Review StarCoders
   .row
     .col-xs-12.col-md-6
-      form.form-horizontal(action="loc8r/location", method="get", role="form")
+      form.form-horizontal(action="", method="post", role="form")
+        - if (error == "val")
+          .alert.alert-danger(role="alert") all fields are required
         .form-group
           label.col-xs-10.col-sm-2.control-label(for="name") Name
           .col-xs-12.col-sm-10

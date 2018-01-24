@@ -1,40 +1,38 @@
 extends layout
 
+include ../_includes/sharedHTMLfunctions
+
 block content
   .row.page-header
     .col-lg-12
-      h1 StarCoders
+      h1= pageHeader.title
   .row
     .col-xs-12.col-md-9
         .row
           .col-xs-12.col-sm-6
             p.rating
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star
-              span.glyphicon.glyphicon-star-empty
-              span.glyphicon.glyphicon-star-empty
-              span.badge.pull-right.badge-default 100
-            p 125 high st.
+              +outputRating(location.rating)
+            p= location.address
             .panel.panel-primary
               .panel-heading
                 h2.panel-title Opening Hours
               .panel-body
-                p Monday - Friday : 7:00am -7:00pm
-                p Saturday : 8:00am - 5:00pm
-                p Sunday : closed
+                each time in location.openingTimes
+                  p
+                    | #{time.days} :
+                    if time.closed
+                      | closed
+                    else
+                      | #{time.opening} - #{time.closing}
             .panel.panel-primary
               .panel-heading
                 h2.panel-title Facilities
               .panel-body
-                span.label.label-warning
-                  span.glyphicon.glyphicon-ok
-                  | &nbsp;Smart
-                | &nbsp
-                span.label.label-warning
-                  span.glyphicon.glyphicon-ok
-                  | &nbsp;Premium
-                | &nbsp;
+                each facility in location.Facilities
+                  span.label.label-warning
+                    span.glyphicon.glyphicon-ok
+                    | &nbsp;#{faclity}
+                  | &nbsp;
           .col-xs-12.col-sm-6.location-map
             .panel.panel-primary
               .panel-heading
@@ -45,32 +43,19 @@ block content
           .col-xs-12
             .panel.panel-primary.review-panel
               .panel-heading
-                a.btn.btn-default.pull-right(href='/loc8r/location/review/new') Add review
-                h2.panel-title Customer Reviews
+                a.btn.btn-default.pull-right(href='/loc8r/location/#{location._id}/review/new') Add review
+                h2.panel-title Reviews
               .panel-body.review-container
-                .row
-                  .review
-                    .well.well-sm.review-header
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                    span.reviewAuthor MEAN
-                    small.reviewTimestamp 01 July 2018
+                each review in location.reviews
+                  .row
+                    .review
+                      .well.well-sm.review-header
+                        span.rating
+                          +outputRating(review.rating)
+                    span.reviewAuthor #{review.author}
+                    small.reviewTimestamp
+                          +formatDate(review.createdOn)
                   .col-xs-12
-                    P A great team!
-                .row
-                  .review
-                    .well.well-sm.review-header
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.glyphicon.glyphicon-star
-                      span.reviewAuthor MEAN
-                    small.reviewTimestamp 01 July 2018
-                  .col-xs-12
-                    P A great team!
+                    P !{(review.reviewText).replace(/\n/g, '<br/>')}
     .col-xs-12.col-md-3
-      p.lead smartcodes is available via emails or calls.
+      p.lead #{location.name} #{sidebar.context}
