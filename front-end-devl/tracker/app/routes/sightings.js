@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   model(){
+    /***************************************************
     let record1 = this.store.createRecord('sighting', {
       location: 'Atlanta',
       sightedAt: new Date('2017-05-01')
@@ -21,5 +22,7 @@ export default Route.extend({
     });
 
     return [record1, record2, record3, record4 ];
+    ****************************************************/
+    return this.store.findAll('sighting', {reload: true});
   }
 });

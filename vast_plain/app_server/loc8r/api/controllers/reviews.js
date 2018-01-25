@@ -2,7 +2,7 @@ var  request = require('request');
 var mongoose = require('mongoose');
 var Loc = mongoose.model('Location');
 
-var sendJsonReponse = function(res, status, cotent){
+var sendJsonReponse = function(res, status, content){
   res.status(status);
   res.json(content);
 };
@@ -25,7 +25,7 @@ var doSetAverageRating = function(location) {
     reviewCount = location.reviews.length;
     ratingTotal = 0;
     for (i=0; i<reviewCount; i++) {
-      ratingTotal = ratingTotal + locaiton.reviews[i].rating;
+      ratingTotal = ratingTotal + location.reviews[i].rating;
     }
 
     ratingAverage = parseInt(ratingTotal/reviewCount, 10);
@@ -42,24 +42,31 @@ var doSetAverageRating = function(location) {
 
 
 var doAddReview = function(req, res, location) {
+  console.log("Review API call doAddReview - " + location);
+  console.log("Review API call doAddReview - reviews " + location.reviews.length);
   if (!location) {
+    console.log('location id not found');
     sendJsonReponse(res, 404 , {
       "message" : "location id not found"
     });
   } else {
+
     location.reviews.push({
       author: req.body.author,
       rating: req.body.rating,
       reviewText: req.body.reviewText
     });
+
     location.save(function(err, location) {
       var thisReview;
       if (err) {
         console.log(err);
         sendJsonReponse(res, 400, err);
       } else {
+        console.log("after save API call doAddReview - reviews " + location.reviews.length);
         updateAverageRating(location._id);
         thisReview = location.reviews[location.reviews.length-1];
+
         sendJsonReponse(res, 201, thisReview);
       }
     });
@@ -67,7 +74,7 @@ var doAddReview = function(req, res, location) {
 };
 
 module.exports.reviewsCreate = function(req, res) {
-    console.log(req.body);
+    console.log(" reviewsCreate req body" +req.body);
     var locationid = req.params.locationid;
     if (locationid) {
       Loc

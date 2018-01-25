@@ -147,11 +147,11 @@ var renderReviewForm = function(req, res, locDetail) {
 
 module.exports.doAddReview = function(req, res) {
   var requestOptions, path, locationid, postdata;
-  locationid = req.parms.locationid;
+  locationid = req.params.locationid;
   path = "/api/loc8r/locations/" + locationid + '/reviews';
   postdata = {
-    author: req.body.name;
-    rating: parseInt(req.body.rating, 10);
+    author: req.body.name,
+    rating: parseInt(req.body.rating, 10),
     reviewText: req.body.review
   };
   requestOptions = {
@@ -160,15 +160,19 @@ module.exports.doAddReview = function(req, res) {
     json: postdata
   };
   if (!postdata.author || !postdata.rating || !postdata.reviewText) {
-    res.redirect('/location/' + locationid + '/reviews/new?err=val');
+    res.redirect('/loc8r/location/' + locationid + '/loc8r/reviews/new?err=val');
   } else {
     request (
       requestOptions,
       function(err, response, body) {
+        console.log('doAddReview err' + err);
+        console.log('doAddReview response' + response);
+        console.log('doAddReview body' + body);
+
         if (response.statusCode ===201) {
-          res.redirect('/location/' + locationid);
+          res.redirect('/loc8r/location/' + locationid);
         } else if (response.statusCode ===400 && body.name && body.name === "ValidationError") {
-          res.redirect('/location/' + locationid + '/reviews/new?err=val');
+          res.redirect('/loc8r/location/' + locationid + '/reviews/new?err=val');
         }
         else {
           console.log(body);
@@ -181,7 +185,7 @@ module.exports.doAddReview = function(req, res) {
 
 module.exports.addReview = function(req, res) {
   getLocationInfo(req, res, function(req, res, responseData) {
-    renderReviewForm(req, res);
+    renderReviewForm(req, res, responseData);
   });
 };
 module.exports.about = function(req, res) {
