@@ -29,5 +29,9 @@
   </nav>
 </header>
 <div class="container">
+  {{#if isAlertShowing}}
+    {{flash-alert message=alertMessage alertType=alertType
+      close=(action "removeAlert")}}
+  {{/if}}
   {{outlet}}
 </div>

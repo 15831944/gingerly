@@ -16,6 +16,14 @@ export default Controller.extend({
         this.get('sighting').rollbackAttribute();
       }
       this.transitionToRoute('sightings');
+    },
+    delete(){
+      var self =  this;
+      if (window.confirm("Are you sure you want to delete this sighting?")) {
+        this.get('sighting').destroyRecord().then(() => {
+          self.transitionToRoute('sightings');
+        });
+      }
     }
   }
 });

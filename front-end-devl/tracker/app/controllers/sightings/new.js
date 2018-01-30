@@ -6,6 +6,10 @@ export default Controller.extend({
     create(){
       var self= this;
       this.get('model.sighting').save().then(function(){
+        self.send('flash', {
+          alertType: "success",
+          message: "New sighting"
+        });
         self.transitionToRoute('sightings');
       });
     },
