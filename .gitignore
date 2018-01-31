@@ -1,6 +1,7 @@
 *~
 bootstrap
 jquery
+angular
 node_modules
 bower_components
 favicon.ico
@@ -16,6 +17,7 @@ tests
 vendor
 dist
 tmp
+jquery-3.2.1.min.js
 
 robots.txt
 .sass-cache

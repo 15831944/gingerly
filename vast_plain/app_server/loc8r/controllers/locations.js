@@ -65,6 +65,23 @@ var getLocationInfo = function(req, res, cb) {
   );
 };
 
+module.exports.homelist = function(req, res) {
+  renderHomepage(req, res);
+};
+
+var renderHomepage = function(req, res) {
+  res.render('loc8r/locations-list', {
+    title: 'Loc8r',
+    pageHeader : {
+          title: 'Loc8r',
+          strapline: 'find the best resources to work with'
+        },
+    sidebar: "Always look for the best projects to work"
+  });
+};
+/*************************************************************
+***COMMENT OUT to move this from EXPRESS TO Angular   ********
+**************************************************************
 var renderHomepage = function(req, res, responseBody) {
   var message;
   if (!(responseBody instanceof Array)) {
@@ -119,6 +136,7 @@ module.exports.homelist = function(req, res) {
     });
 
 };
+************************************************************/
 
 var renderDetailPage = function(req, res, locDetail) {
   res.render('loc8r/location-info', {
@@ -141,7 +159,8 @@ var renderReviewForm = function(req, res, locDetail) {
   res.render('loc8r/location-review-form', {
     title: 'Review' + locDetail.name + 'on Loc8r',
     pageHeader: {title: 'Review' + locDetail.name},
-    error: req.query.err
+    error: req.query.err,
+    url: req.originalUrl
   });
 };
 
