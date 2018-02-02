@@ -78,7 +78,7 @@ var locationListCtrl = function ($scope, loc8rData, geolocation) {
   };
 
   $scope.noGeo = function(){
-    $scope.$apply(funciton(){
+    $scope.$apply(function(){
       $scope.message = "geo location is not supported";
     });
   };

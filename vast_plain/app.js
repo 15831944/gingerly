@@ -11,7 +11,8 @@ var zw_db = require ('./app_server/models/db');
 var index = require('./app_server/routes/index');
 
 
-var loc8rRoutes = require('./app_server/loc8r/routes/index');
+var loc8rExpressRoutes = require('./app_server/loc8r/routes/index');
+var loc8rAngularRoutes = require('./app_server/loc8r/routes/main');
 var loc8rApiRoutes = require('./app_server/loc8r/api/routes/index');
 
 var users = require('./app_server/routes/users');
@@ -30,7 +31,8 @@ app.use(express.static(path.join(__dirname, 'app_client')));
 //app.get('/', function (req, res) {  res.send('Hello World!')})
 //app.get('/', (req, res) =>res.send('Hello Express'));
 app.use('/', index);
-app.use('/loc8r', loc8rRoutes);
+//app.use('/loc8r', loc8rExpressRoutes);
+app.use('/loc8r', loc8rAngularRoutes);
 app.use('/api/loc8r', loc8rApiRoutes);
 
 app.use('/users', users);
