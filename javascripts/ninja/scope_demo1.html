@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function scope demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    function isNimble() {
+      return true;
+    }
+    assert(typeof window.isNimble === "function",
+      "isNimble is defined");
+    assert(isNimble.name === "isNimble",
+      "isNimble has a name " + isNimble.name);
+    function outer(){
+      assert(typeof inner === "function",
+      "inner before declaration");
+      function inner(){}
+      assert(typeof inner === "function",
+      "inner after declaration");
+      assert(window.inner === undefined, "inner is not in global scope");
+    }
+    outer();
+    assert(window.inner === undefined, "inner still not in global scope");
+    window.wieldsSword = function swingsSword(){return true; };
+
+    assert(window.wieldsSword.name === 'swingsSword',   "wieldsSword real name  is swingsSword");
+
+  </script>
+  </body>
+</html>

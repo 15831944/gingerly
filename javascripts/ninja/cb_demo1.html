@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple callback demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    var text = 'Demo';
+    function useless(cb) {
+      report("In useless function");
+      return cb();
+    }
+    function getText(){
+      report ("In getTextFunction");
+      console.log("getText returns" + text);
+      return text;
+    }
+    report("Before making all the calls");
+    assert(useless(getText) === text,
+      "The useless function works " + text);
+    report("after making all the calls")
+  </script>
+  </body>
+</html>

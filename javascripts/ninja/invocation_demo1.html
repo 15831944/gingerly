@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    function creep() {return this;}
+    assert(creep() === window,  "creep in the window");
+    var sneak = creep;
+    assert(sneak() === window,  "sneak in the window");
+    var ninja1 = {
+      skulk : creep
+    };
+    assert(ninja1.skulk() === ninja1, " The 1st ninja is skulking");
+    var ninja2 = {
+      skulk: creep
+    };
+    assert(ninja2.skulk() === ninja2, " The 2nd ninja is skulking");
+
+    function Ninja() {
+      this.skulk = function(){return this;}
+    };
+    var ninja3 = new Ninja();
+    var ninja4 = new Ninja();
+    assert(ninja3.skulk() === ninja3, " The 3rd ninja is skulking");
+    assert(ninja4.skulk() === ninja4, " The 4th ninja is skulking");
+
+
+  </script>
+  </body>
+</html>

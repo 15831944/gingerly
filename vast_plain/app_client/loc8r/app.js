@@ -1,16 +1,18 @@
-angular.module('loc8rApp', ['ngRoute']);
+(function () {
+  angular.module('loc8rApp', ['ngRoute']);
 
-function config ($routeProvider) {
-  $routeProvider
-  .when('/', {
-    templateUrl: 'home/home.view.html',
-    controller: 'homeCtrl',
-    controllerAs: 'vm'
+  function config ($routeProvider) {
+    $routeProvider
+    .when('/', {
+      templateUrl: 'home/home.view.html',
+      controller: 'homeCtrl',
+      controllerAs: 'vm'
 
-  })
-  .otherwise({redirectTo: '/'});
-}
+    })
+    .otherwise({redirectTo: '/'});
+  }
 
-angular
-    .module('loc8rApp')
-    .config(['$routeProvider', config]);
+  angular
+      .module('loc8rApp')
+      .config(['$routeProvider', config]);
+})();

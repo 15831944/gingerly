@@ -53,17 +53,19 @@ public class Program
 
             printPDFBuilder1.Filename = aPart.FullPath.Replace(".prt", ".pdf");
             //printPDFBuilder1.Filename = "C:\\Temp\\" + aPart.Leaf.Replace(".prt", ".pdf");
-
+            printPDFBuilder1.Scale = 1.0;
+            printPDFBuilder1.Size = PrintPDFBuilder.SizeOption.ScaleFactor;
             
             Echo("pdf :" + printPDFBuilder1.Filename);
           
-            printPDFBuilder1.Size = NXOpen.PrintPDFBuilder.SizeOption.Dimension;
-            printPDFBuilder1.OutputText = NXOpen.PrintPDFBuilder.OutputTextOption.Polylines;
-            printPDFBuilder1.Units = NXOpen.PrintPDFBuilder.UnitsOption.English;
-            printPDFBuilder1.YDimension = 8.5;
-            printPDFBuilder1.XDimension = 11.0;
-            printPDFBuilder1.RasterImages = true;
-            printPDFBuilder1.Append = false;
+            //printPDFBuilder1.Size = NXOpen.PrintPDFBuilder.SizeOption.Dimension;
+            //printPDFBuilder1.OutputText = NXOpen.PrintPDFBuilder.OutputTextOption.Polylines;
+            //printPDFBuilder1.Units = NXOpen.PrintPDFBuilder.UnitsOption.English;
+            //printPDFBuilder1.YDimension = 8.5;
+            //printPDFBuilder1.XDimension = 11.0;
+            printPDFBuilder1.RasterImages = false;
+            printPDFBuilder1.ShadedGeometry = true;
+            //printPDFBuilder1.Append = false;
             // printPDFBuilder1.AddWatermark = true;
             //printPDFBuilder1.Watermark = "ZTEST WATERMARK";
             printPDFBuilder1.Colors = PrintPDFBuilder.Color.BlackOnWhite;
