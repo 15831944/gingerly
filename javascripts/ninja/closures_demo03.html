@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function closures demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+    <div id="testSubject"></div>
+    <button type="button" name="button" id="testButton">Go</button>
+  <script type="text/javascript">
+    jQuery('#testButton').click(function(){
+      var elem$ = jQuery("#testSubject");
+      elem$.html("Loading...");
+      jQuery.ajax({
+        url: "test.html",
+        success: function(html) {
+          assert(elem$, "See elem$ via the closure for callback");
+          elem$.html(html);
+        }
+      });
+    });
+
+
+  </script>
+  </body>
+</html>

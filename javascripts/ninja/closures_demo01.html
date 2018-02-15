@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function closures demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    var outerValue  = 'ninja';
+    var later;
+    console.log("outervalue " + outerValue);
+    function outerFunction(){
+      console.log("enter outerfuntion");
+      var innerValue = 'samurai';
+      console.log("innervalue " + innerValue);
+      function innerFunction (paramValue){
+        console.log("inside inner fun");
+        assert(outerValue, 'I can see ninja');
+        assert(innerValue, 'I can see samurai');
+        assert(paramValue, 'I can see wakizashi' );
+        assert(tooLate, 'I can see robin' );
+      }
+      console.log("later");
+      later = innerFunction;
+    }
+    assert(!tooLate, "outer can not see the robin");
+    var tooLate = 'robin';
+
+    console.log("calling outer");
+    outerFunction();
+    console.log("calling later");
+    later('wakizashi');
+
+  </script>
+  </body>
+</html>

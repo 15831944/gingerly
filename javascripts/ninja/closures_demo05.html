@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function closures demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+
+    <button type="button" name="button" id="test">Go</button>
+    <script type="text/javascript">
+      function bind(context, name) {
+        return function(){
+          return context[name].apply(context, arguments);
+        }
+      }
+
+      var button = {
+        clicked: false,
+        click: function(){
+          console.log("inside click");
+          this.clicked =  true;
+          assert(button.clicked, "button is clicked");
+        }
+      };
+
+      var elem = document.getElementById("test");
+      //elem.addEventListener("click", button.click, false);
+      elem.addEventListener("click", bind(button, "click"), false);
+
+     </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Anonymous function demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    window.onload = function(){
+      assert(true, 'power');
+    };
+    var ninja = {
+      shout: function(){
+        assert(true, "ninja");
+      }
+    };
+
+    ninja.shout();
+    setTimeout(function(){
+      assert(true, 'forever');
+    }, 500);
+
+  </script>
+  </body>
+</html>

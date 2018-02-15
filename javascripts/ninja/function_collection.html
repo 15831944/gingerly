@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A collection of functions demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    var store = {
+      nextId: 1,
+      cache: {},
+      add: function(fn){
+        if (!fn.id) {
+          fn.id = store.nextId++;
+          return !!(store.cache[fn.id] = fn);
+        }
+      }
+    };
+    function ninja(){};
+    assert(store.add(ninja), "Function is added");
+    assert(store.add(ninja), "Try to add the same function again");
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Faking Array Method demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+    <input type="text" name="" value="" id="first">
+    <input type="text" name="" value="" id="second">
+  <script type="text/javascript">
+    var elems = {
+      length: 0,
+      add: function(elem) {
+        console.log("push " + elem);
+        Array.prototype.push.call(this, elem);
+      },
+      gather: function (id) {
+        console.log("adding " + document.getElementById(id));
+        this.add(document.getElementById(id));
+      }
+    };
+    elems.gather("first");
+    assert(elems.length ==1 && elems[0].nodeType, "Verify we have an element in our stash");
+    elems.gather("second");
+    assert(elems.length ==2 && elems[1].nodeType, "Verify the 2nd addition");
+
+  </script>
+  </body>
+</html>

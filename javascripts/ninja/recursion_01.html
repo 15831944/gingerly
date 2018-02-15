@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Named recusive function demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    function isPalindome(text) {
+      if (text.length <=1) return true;
+      if (text.charAt(0) != text.charAt(text.length -1)) return false;
+      return isPalindome(text.substr(1, text.length -2));
+    }
+
+    assert( isPalindome("hannah"), "Hannah is a Palindom");
+
+  </script>
+  </body>
+</html>

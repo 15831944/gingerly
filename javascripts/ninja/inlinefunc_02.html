@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Recusive inline function demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    var ninja = function myNinja(){
+      assert(ninja == myNinja, "This function is named two things at once");
+    };
+    ninja();
+    assert(typeof myNinja == "undefined", "MyNinja is not defined outside the function");
+
+  </script>
+  </body>
+</html>

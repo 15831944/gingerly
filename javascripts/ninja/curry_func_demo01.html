@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function closures demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+    <script type="text/javascript">
+    console.log("define currit");
+    var curryIt = function(fn) {
+      console.log("inside curryIt");
+      for ( var i=0; i <arguments.length; i++){
+        console.log("arguments  " + i+ " -" +  arguments[i]);
+      }
+      var parameters = Array.prototype.slice.call(arguments, 1);
+        console.log("paramenter length " + parameters.length);
+        for ( var i=0; i <parameters.length; i++){
+          console.log("parameters  " + i+ " -" +  parameters[i]);
+        }
+      return function() {
+        var temp1 =   Array.prototype.slice.call(arguments, 0);
+        var temp2 =  parameters.concat( Array.prototype.slice.call(arguments, 0));
+        console.log("temp1 " + temp1);
+        console.log("temp2 " + temp2);
+        return fn.apply(this, parameters.concat(
+          Array.prototype.slice.call(arguments, 0)
+        ));
+      };
+    };
+    console.log("definte greeter");
+    var greeter = function(greeting, separator, emphasis, name) {
+      console.log(greeting + separator + name + emphasis);
+    };
+    console.log("define greetHeelo");
+    var greetHello = curryIt(greeter, "Hello", ", ", ".");
+    console.log("calling heidi");
+    greetHello("Heidi");
+    console.log("calling eddie");
+    greetHello("Eddie");
+    console.log("define  greetgood");
+    var greetGoodbye = curryIt(greeter, "Goodbye", ", ");
+    console.log("calling joe");
+    greetGoodbye(".", "Joe"); //"Goodbye, Joe."
+
+     </script>
+  </body>
+</html>

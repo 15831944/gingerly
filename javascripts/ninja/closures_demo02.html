@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function closures demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    function Ninja(){
+      var feints = 0;
+      this.getFeints = function(){
+        return feints;
+      };
+      this.feint = function(){
+        feints++;
+      };
+    }
+    var ninja = new Ninja();
+    ninja.feint();
+    assert(ninja.getFeints() ==1 , "access inner count");
+    assert(ninja.feints ===undefined, "private data  is not accessiable");
+
+  </script>
+  </body>
+</html>
