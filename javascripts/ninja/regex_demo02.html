@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+    <div class="samurai ninja"></div>
+    <div class="ninja samurai"></div>
+    <div></div>
+    <span class="samurai ninja robin"></span>
+  <script type="text/javascript">
+      function findClassInElement(className, type) {
+        var elems = document.getElementsByTagName(type || "*");
+        console.log("collected elemens " + elems.length);
+        var regex = new RegExp("(^|\\s)" + className + "(\\s|$)");
+
+        var results = [];
+
+        for (var i=0, length=elems.length; i<length; i++ ) {
+          if (regex.test(elems[i].className)) {
+            console.log("adding " + elems[i].className);
+            results.push(elems[i]);
+          }
+        }
+        return results;
+      }
+      assert(findClassInElement("ninja", "div").length ==2, "the right amount ninjs div is found");
+      assert(findClassInElement("ninja", "span").length ==1, "the right around ninja span found");
+      assert(findClassInElement("ninja").length ==3 , "all ninja found");
+
+  </script>
+  </body>
+</html>

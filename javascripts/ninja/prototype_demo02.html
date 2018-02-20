@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    function Ninja(){
+      console.log("Inside Ninja fn");
+      this.swung = false;
+      this.swingSword = function(){
+        return !this.swung;
+      };
+
+    }
+    Ninja.prototype.swingSword = function(){
+      return this.swung ;
+    };
+
+    console.log("before ninja");
+    var ninja = new Ninja();
+    assert(  ninja.swingSword(), "called the instance method not prototype");
+  </script>
+  </body>
+</html>

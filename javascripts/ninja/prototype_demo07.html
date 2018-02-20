@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    function User(first, last) {
+      console.log("enter User");
+      if (!(this instanceof arguments.callee)) {
+        console.log("return new instance");
+        return new User(first, last);
+      }
+      this.name = first + " " + last;
+      console.log("the name :" + name);
+    }
+    console.log("initiate Kurosaki");
+    name = "Rukia";
+    var user = User("Ichigo", "Kurosaki");
+    assert(user, "User initiated");
+    assert(name == "Rukia", "Name is correct");
+    assert( user instanceof User, "user iniated correctly");
+    assert(user.name == "Ichigo Kurosaki", "user name correct")
+
+  </script>
+  </body>
+</html>

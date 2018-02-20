@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+    <div  id="opacity" style="opacity:0.5; filter:alpha(opacity=50);"></div>
+  <script type="text/javascript">
+     var html = "<div class='test'><b>Hello</b><i>worlds</i></div> ";
+     var results = html.match(/<(\/?)(\w+)([^>]*?)>/);
+     console.log("results " + results.length);
+     console.log(results[0]);
+
+
+  </script>
+  </body>
+</html>

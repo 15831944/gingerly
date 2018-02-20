@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    Function.prototype.memoized = function(key) {
+      this._values = this._values || {};
+      return this._values[key] !== undefined ?
+          this._values[key] :
+          this._values[key] = this.apply(this, arguments);
+    };
+    function isPrime(num) {
+      console.log("input value " + num);
+      var prime = num !== 1;
+      for (var i=2; i < num; i++) {
+        if (num %i === 0) {
+          prime = false;
+          break;
+        }
+      }
+      return prime;
+    }
+
+    assert(isPrime.memoized(5), " 5 is prime");
+    assert(isPrime._values[5], "the answer was cache now");
+    assert(isPrime._values[6], "the answer was cache or not");
+    assert(isPrime._values[11], "the answer was cache or not");
+  </script>
+  
+  </body>
+</html>

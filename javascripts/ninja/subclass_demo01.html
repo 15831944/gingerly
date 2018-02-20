@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+    var Person = Object.subClass({
+      init: function(isDancing) {
+        this.dancing = isDancing;
+      },
+      dance: function(){
+        return this.dancing;
+      }
+    });
+    var Ninja = Person.subClass({
+      init: function(){
+        this._super(false);
+      },
+      dance: function(){
+        return this._super();
+      },
+      swingSword : function(){
+        return true;
+      }
+    });
+
+    var person = new Person(true);
+    assert(person.dance(), "This person is dancing");
+    var ninja = new Ninja();
+    assert(ninja.swingSword(), "The sword is swing");
+    assert(!ninja.dance(), "The ninja is not dancing");
+    assert(person instanceof Person, "Instance of Person");
+    assert (ninja instanceof Ninja && ninja instanceof Person, "both instnaces");
+
+  </script>
+  </body>
+</html>

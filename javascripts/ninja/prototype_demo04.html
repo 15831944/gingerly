@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+    <div id="parent">
+      <div id="a"> I will be removed  </div>
+      <div id="b"> I will be removed  </div>
+    </div>
+  <script type="text/javascript">
+      console.log("starts here");
+      HTMLElement.prototype.remove = function(){
+        console.log("calling  prototype remove method");
+        if (this.parentNode)
+          this.parentNode.removeChild(this);
+      };
+      var a = document.getElementById("a");
+      console.log("calling the old way");
+      a.parentNode.removeChild(a);
+      console.log("calling the new method");
+      document.getElementById("b").remove();
+  </script>
+  </body>
+</html>

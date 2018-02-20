@@ -30,7 +30,11 @@
         var delay = setTimeout.partial(undefined, 1000);
         delay(function(){
           assert(true, "call to this will delay 1s");
-        })
+        });
+        var bindClick = document.body.addEventListener.partial("click", undefined, false);
+        bindClick(function(){
+          assert(true, "click event bound via curried function");
+        });
      </script>
   </body>
 </html>

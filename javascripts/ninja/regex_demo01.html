@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+      var re1 = /test/i;
+      var re2 = new  RegExp("test", "i");
+      assert(re1.toString() == "/test/i", "verify the content of the expression");
+      assert(re1.test("TestT"), "Yes, case in-sensitive");
+      assert(re2.test("TestT"), "This one too");
+      assert(re1.toString() == re2.toString(), "the two expressions are equal");
+      assert(re1 != re2 , "They are differnet obj") ;
+
+  </script>
+  </body>
+</html>

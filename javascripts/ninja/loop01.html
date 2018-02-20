@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+    <div>  DIV 0  </div>
+    <div>  DIV 1  </div>
+  <script type="text/javascript">
+    console.log("enter the script");
+    var divs = document.getElementsByTagName("div");
+    console.log("get divs " + divs.length);
+    for (var i=0; i< divs.length; i++) {
+      console.log("inside for loop " + i);
+      divs[i].addEventListener("click", function(){
+        console.log("alert " + i);
+        alert("divs # " + i + " was clicked");
+      }, false);
+    }
+  </script>
+  </body>
+</html>
