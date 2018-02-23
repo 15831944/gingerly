@@ -9,8 +9,12 @@
         //return $http.get('/api/loc8r/locations?lng='+lng+'&lat='+lat+'&maxDistance=700000');
         return $http.get('/api/loc8r/locations?lng=-0.9692599&lat=51.4558091&maxDistance=700000');
     };
+    var locationById = function(locationid) {
+      return $http.get('/api/loc8r/locations/'+locationid);
+    }
     return {
-      locationByCoords: locationByCoords
+      locationByCoords: locationByCoords,
+      locationById: locationById
     };
   }
 })();

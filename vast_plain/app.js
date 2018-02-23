@@ -35,7 +35,7 @@ app.use('/', index);
 //app.use('/loc8r', loc8rAngularRoutes);
 app.use('/api/loc8r', loc8rApiRoutes);
 app.use('/loc8r', function(req, res) {
-  res.sendfile(path.join(__dirname, 'app_client', 'index.html'));
+  res.sendfile(path.join(__dirname, 'app_client/loc8r', 'index.html'));
 });
 app.use('/users', users);
 

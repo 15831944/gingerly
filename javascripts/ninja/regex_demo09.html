@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+  <script type="text/javascript">
+     function compress(source) {
+       var keys = {};
+       source.replace(
+         /([^=&]+)=([^&]*)/g, function(full, key, value) {
+           console.log("full:["+full+"],key:["+key+"],value:["+value+"]!");
+           keys[key] = (keys[key]? keys[key] + "," : "") + value;
+           return "";
+         }
+       );
+
+       var result = [];
+       for (var key in keys) {
+         result.push(key+"="+keys[key]);
+       }
+       return result.join("&");
+     }
+     assert(compress("foo=111&foo=222&blah=aaa&blah=bbb&foo=333") == "foo=111,222,333&blah=aaa,bbb", "Compression is good");
+  </script>
+  </body>
+</html>

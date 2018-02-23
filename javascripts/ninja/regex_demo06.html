@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A simple function invocation demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+    <div  id="opacity" style="opacity:0.5; filter:alpha(opacity=50);"></div>
+  <script type="text/javascript">
+     var html = "<b class='hello'>Hello</b><i>worlds</i></div> ";
+     var pattern = /<(\w+)([^>]*)>(.*?)<\/\1>/g ;
+     var match = pattern.exec(html);
+    console.log("["+ match[0] +"]" + "-" + match[1]+ "-" + match[2]+ "-" + match[3]+ "-" );
+    match = pattern.exec(html);
+    console.log("["+ match[0] +"]" + "-" + match[1]+ "-" + match[2]+ "-" + match[3]+ "-" );
+
+  </script>
+  </body>
+</html>

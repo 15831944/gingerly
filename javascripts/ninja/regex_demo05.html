@@ -10,19 +10,15 @@
     <div  id="opacity" style="opacity:0.5; filter:alpha(opacity=50);"></div>
   <script type="text/javascript">
      var html = "<div class='test'><b>Hello</b><i>worlds</i></div> ";
-     var results = html.match(/<(\/?)(\w+)([^>]*?)>/);
-     console.log("results " + results.length);
-     console.log(results[0]);
-     console.log(results[1]);
-     console.log(results[2]);
-     console.log(results[3]);
-     var all = html.match(/<(\/?)(\w+)([^>]*?)>/g);
-     console.log(all[0]);
-     console.log(all[1]);
-     console.log(all[2]);
-     console.log(all[3]);
-     console.log(all[4]);
-     console.log(all[5]);
+     var tag = /<(\/?)(\w+)([^>]*?)>/g, match;
+     var num = 0;
+
+     while ((match  =tag.exec(html)) !== null) {
+       assert(match.length ==4 , "every match finds each tag and 3 captures");
+       console.log("["+ match[0] +"]" + "-" + match[1]+ "-" + match[2]+ "-" + match[3]+ "-" )
+       num ++;
+     }
+     assert(num==6, "3 opening and 3 closing tags found");
 
   </script>
   </body>
