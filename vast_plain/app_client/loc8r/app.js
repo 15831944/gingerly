@@ -1,5 +1,5 @@
 (function () {
-  angular.module('loc8rApp', ['ngRoute']);
+  angular.module('loc8rApp', ['ui.bootstrap', 'ngRoute']);
 
   function config ($routeProvider) {
     $routeProvider

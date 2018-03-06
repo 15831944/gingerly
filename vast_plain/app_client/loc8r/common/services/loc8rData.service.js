@@ -11,10 +11,15 @@
     };
     var locationById = function(locationid) {
       return $http.get('/api/loc8r/locations/'+locationid);
-    }
+    };
+    var addReviewById = function(locationid, data) {
+      return $http.post('/api/loc8r/locations/' + locationid + '/reviews' , data);
+    };
+
     return {
       locationByCoords: locationByCoords,
-      locationById: locationById
+      locationById: locationById,
+      addReviewById: addReviewById
     };
   }
 })();

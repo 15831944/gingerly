@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link data-require="bootstrap-css@*" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.2.4.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+
+  <body >
+    <script type="text/javascript">
+    angular.module('ui.bootstrap.demo', ['ui.bootstrap'])
+      .factory('modalFactory', function($uibModal) {
+        return {
+          open: function(size, template, params) {
+            return $uibModal.open({
+              animation: true,
+              templateUrl: template || 'myModalContent.html',
+              controller: 'ModalResultInstanceCtrl',
+              size: size,
+              resolve: {
+                params: function() {
+                  return params;
+                }
+              }
+            });
+          }
+        };
+      })
+      .controller('ModalDemoCtrl', function($rootScope, $scope, $log, $uibModal) {
+
+        //$scope.items = ['item1', 'item2', 'item3'];
+
+        //$scope.animationsEnabled = true;
+
+        $scope.open = function(size, template) {
+          var modalInstance = $uibModal.open({
+              animation: $scope.animationsEnabled,
+              templateUrl: template || 'myModalContent.html',
+              controller: 'ModalInstanceCtrl',
+              size: size
+            });
+
+          /*modalInstance.result.then(function(selectedItem) {
+            $scope.selected = selectedItem;
+          }, function() {
+            $log.info('Modal dismissed at: ' + new Date());
+          });*/
+        };
+
+        $scope.toggleAnimation = function() {
+          $scope.animationsEnabled = !$scope.animationsEnabled;
+        };
+
+      });
+
+    // Please note that $modalInstance represents a modal window (instance) dependency.
+    // It is not the same as the $uibModal service used above.
+
+    angular.module('ui.bootstrap.demo').controller('ModalInstanceCtrl', function($scope, $uibModalInstance, modalFactory) {
+
+      //$scope.searchTerm = term;
+
+      $scope.ok = function() {
+        modalFactory.open('lg', 'result.html', {searchTerm: $scope.searchTerm});
+        //$uibModalInstance.close($scope.searchTerm);
+      };
+
+      $scope.cancel = function() {
+        $uibModalInstance.dismiss('cancel');
+      };
+    });
+
+    angular.module('ui.bootstrap.demo').controller('ModalResultInstanceCtrl', function($scope, $uibModalInstance, params) {
+
+      $scope.searchTerm = params.searchTerm;
+
+      $scope.ok = function() {
+        $uibModalInstance.close($scope.searchTerm);
+      };
+
+      $scope.cancel = function() {
+        $uibModalInstance.dismiss('cancel');
+      };
+    })
+
+
+    </script>
+    <div ng-app="ui.bootstrap.demo">
+      <div ng-controller="ModalDemoCtrl">
+        <script type="text/ng-template" id="myModalContent.html">
+          <div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+          </div>
+          <div class="modal-body">
+            Demo form submit:
+            <br/>
+            <form ng-submit="ok()">
+              <div class="input-group animated fadeIn">
+                <input type="text" class="form-control finderBar" ng-model="searchTerm" placeholder="City, State..." autofocus>
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="ok()">Go!</button>
+            </span>
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+          </div>
+        </script>
+
+        <script type="text/ng-template" id="result.html">
+          <div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+          </div>
+          <div class="modal-body">
+             You searched for: {{searchTerm}}
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="cancel()">Close</button>
+          </div>
+        </script>
+        <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
+        <!--<button type="button" class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>-->
+        <div ng-show="searchTerm">searchTerm from a modal: {{ searchTerm }}</div>
+      </div>
+
+    </div>
+
+  </body>
+
+</html>

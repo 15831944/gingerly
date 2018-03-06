@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link data-require="bootstrap-css@*" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.2.4.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <title>UI Modal demo</title>
+  </head>
+
+  <body >
+    <script type="text/javascript">
+        angular.module('myApp', ['ui.bootstrap'])
+            .controller('MyModalController', MyModalController)
+            .directive('modalTrigger', modalTriggerDirective)
+            .factory('$myModal', myModalFactory)
+          ;
+
+          function MyModalController($uibModalInstance, items) {
+            var vm = this;
+            vm.content = items;
+            vm.confirm = $uibModalInstance.close;
+            vm.cancel = $uibModalInstance.dismiss;
+          };
+
+          function modalTriggerDirective($myModal) {
+            function postLink(scope, iElement, iAttrs) {
+              function onClick() {
+                var size = scope.$eval(iAttrs.size) || 'lg'; // default to large size
+                var title = scope.$eval(iAttrs.title) || 'Default Title';
+                var message = scope.$eval(iAttrs.message) || 'Default Message';
+                $myModal.open(size, title, message);
+              }
+              iElement.on('click', onClick);
+              scope.$on('$destroy', function() {
+                iElement.off('click', onClick);
+              });
+            }
+
+            return {
+              link: postLink
+            };
+          }
+
+          function myModalFactory($uibModal) {
+            var open = function (size, title, message) {
+              return $uibModal.open({
+                controller: 'MyModalController',
+                controllerAs: 'vm',
+                templateUrl : 'templates/CustomModal.html',
+                size: size,
+                resolve: {
+                  items: function() {
+                    return {
+                      title: title,
+                      message: message
+                    };
+                  }
+                }
+              });
+            };
+
+            return {
+              open: open
+            };
+          }
+
+    </script>
+    <div class="modal-header">
+      <h3 class="modal-title">{{vm.content.title}}</h3>
+    </div>
+    <div class="modal-body">
+      {{vm.content.message}}
+    </div>
+    <div class="modal-footer">
+      <button class="ad-button ad-blue" type="button" ng-click="vm.confirm()">
+        confirm
+      </button>
+      <button class="ad-button ad-blue" type="button" ng-click="vm.cancel()">
+        cancel
+      </button>
+    </div>
+    <button modal-trigger size="'sm'" title="'Hello World!'" message="'This is a test'">
+      Click Me
+    </button>
+
+
+  </body>
+
+</html>

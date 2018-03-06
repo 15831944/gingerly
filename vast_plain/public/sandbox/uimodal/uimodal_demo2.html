@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link data-require="bootstrap-css@*" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.2.4.js"></script>
+    <script type="text/javascript" src="uimodal_app.js"></script>
+    <script type="text/javascript" src="uimodal_ctrl_main.js"></script>
+    <script type="text/javascript" src="uimodal_ctrl2.js"></script>
+    <script type="text/javascript" src="uimodal_ctrl3.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <title>UI Modal demo</title>
+  </head>
+
+  <body >
+
+    <div ng-app="ui.bootstrap.demo">
+      <div ng-controller="ModalDemoCtrl">
+        <script type="text/ng-template" id="myModalContent.html">
+          <div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+          </div>
+          <div class="modal-body">
+            Demo form submit:
+            <br/>
+            <form ng-submit="ok()">
+              <div class="input-group animated fadeIn">
+                <input type="text" class="form-control finderBar" ng-model="searchTerm" placeholder="City, State..." autofocus>
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="ok()">Go!</button>
+            </span>
+              </div>
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+          </div>
+        </script>
+
+        <script type="text/ng-template" id="result.html">
+          <div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+          </div>
+          <div class="modal-body">
+             You searched for: {{searchTerm}}
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="cancel()">Close</button>
+          </div>
+        </script>
+        <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
+        <!--<button type="button" class="btn btn-default" ng-click="toggleAnimation()">Toggle Animation ({{ animationsEnabled }})</button>-->
+        <div ng-show="searchTerm">searchTerm from a modal: {{ searchTerm }}</div>
+      </div>
+
+    </div>
+
+  </body>
+
+</html>

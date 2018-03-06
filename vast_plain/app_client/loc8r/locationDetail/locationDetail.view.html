@@ -12,6 +12,11 @@
              <h2 class="panel-title">Hours</h2>
            </div>
            <div class="panel-body">
+             <p ng-repeat="time in vm.data.location.openingTimes" ng-switch on="time.closed">
+		          {{ time.days }} :
+		          <span class="opening-time" ng-switch-when="true">closed</span>
+		          <span class="opening-time" ng-switch-default> {{time.opening + "-" + time.closing}}</span>
+		        </p>
            </div>
           </div>
          <div class="panel panel-primary">
@@ -42,16 +47,16 @@
        <div class="col-x-12">
           <div class="panel panel-primary review-panel">
             <div class="panel-heading">
-                <a href="" class="btn btn-default pull-right">Add Review</a>
+                <a ng-click="vm.popupReviewForm()" class="btn btn-default pull-right">Add Review</a>
                 <h2 class="panel-title">Reviews</h2>
             </div>
             <div class="panel-body review-container" >
-                <div class="review" ng-repeat="review in vm.data.location.reviews">
+                <div class="review" ng-repeat="review in vm.data.location.reviews | orderBy:'createdOn':true">
                   <div class="row">
                     <div class="well well-sm review-header">
                        <span class="rating" rating-sarts rating="review.rating"></span>
                        <span class="reviewAuthor"> {{review.author}}</span>
-                       <span class="reviewTimestamp"> {{review.createdOn}}</span>
+                       <small class="reviewTimestamp"> {{review.createdOn | date: 'd MMMM YYYY'}}</small>
                     </div>
                     <div class="col-xs-12">
                        <p ng-bind-html="review.reviewText  | addHtmlLineBreaks"></p>

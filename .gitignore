@@ -9,10 +9,9 @@ favicon.ico
 *.bak
 *.lock
 
-libs
+lib
 images
 bin
-stylesheets
 tests
 vendor
 dist
