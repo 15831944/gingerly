@@ -3,9 +3,12 @@
     .module('loc8rApp')
     .controller('locationDetailCtrl', locationDetailCtrl);
 
-    function locationDetailCtrl ($routeParams, $uibModal, loc8rData) {
+    function locationDetailCtrl ($routeParams, $location,  $uibModal, loc8rData, authentication) {
       var vm = this;
       vm.locationid = $routeParams.locationid;
+      vm.isLoggedIn = authentication.isLoggedIn();
+      vm.currentPath = $location.path();
+      
       loc8rData.locationById(vm.locationid)
         .then(function (result, status, config, header){
           vm.data={location: result.data};

@@ -9,7 +9,7 @@
       vm.locationData = locationData;
       vm.onSubmit = function(){
         vm.formError = "";
-        if (!vm.formData.name || !vm.formData.rating || !vm.formData.reviewText) {
+        if ( !vm.formData.rating || !vm.formData.reviewText) {
           vm.formError = "All fields are required";
           return false;
         }else {
@@ -21,7 +21,6 @@
 
       vm.doAddReview = function (locationid, formData) {
         loc8rData.addReviewById(locationid, {
-          author: formData.name,
           rating: formData.rating,
           reviewText: formData.reviewText
         })
@@ -30,7 +29,7 @@
           vm.modal.close(result.data);
         }, function(result, status, config, header) {
           console.log("addReview returns " + status);
-          vm.formError("Save Review Failed");
+          vm.formError = "Save Review Failed";
         });
       }
 

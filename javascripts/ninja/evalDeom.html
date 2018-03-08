@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Named recusive function demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+    <div id="box"> Hello!  </div>
+  <script type="text/javascript">
+    assert(eval("5+5") ===10, "5+5=10");
+    assert(eval("var ninja = 5;") === undefined, "no value is returned");
+    (function(){
+      eval("var ninja = 6;");
+      assert(ninja ===6 , "eval within in the current scope");
+    })();
+    assert( window.ninja ===5, "eval global scope unaffected");
+    assert(ninja === 5 , "global scope unaffected");
+
+    var ninja2 = eval("({name: 'Ninja 2'})");
+    assert( ninja2 != undefined, "The ninja 2 is created");
+    assert( ninja2.name === "Ninja 2", "and with expeced property");
+    var fn = eval("(function(){return 'Ninja'; })");
+    assert(typeof fn === 'function', "the function fn is created");
+    assert(fn() === "Ninja", "and with expected return value");
+    var ninja3 = eval("{name: 'Ninja 3'}");
+    assert( ninja3 != undefined, "The ninja 3 is created");
+    assert( ninja3.name === "Ninja 3", "and with expeced property");
+
+  </script>
+  </body>
+</html>

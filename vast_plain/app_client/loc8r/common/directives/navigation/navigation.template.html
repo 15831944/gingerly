@@ -7,6 +7,13 @@
       <ul class="nav navbar-nav">
         <li><a href="/loc8r/#/about">About</a></li>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="navvm.isLoggedIn"><a href="/loc8r/#/login/?page={{ navvm.currentPath }}">Sign in</a></li>
+        <li ng-show="navvm.isLoggedIn" class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ navvm.currentUser.name }} <span class="caret"></span></a>
+        </li>
+        <li><a href="" ng-click="navvm.logout()">Logout</a></li>
+      </ul>
     </div>
   </div>
 </div>

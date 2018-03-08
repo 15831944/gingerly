@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Named recusive function demo</title>
+    <link rel="stylesheet" href="assert.css">
+    <script type="text/javascript" src="assert.js"> </script>
+  </head>
+  <body>
+    <table>
+  <thead>
+  <tr>
+     <th>Month</th>
+     <th>Savings</th>
+  </tr>
+  </thead>
+  <tfoot>
+  <tr>
+      <td>Sum</td>
+      <td>$180</td>
+  </tr>
+  </tfoot>
+  <tbody>
+  <tr>
+     <td>January</td>
+     <td>$100</td>
+  </tr>
+  <tr>
+      <td>February</td>
+      <td>$80</td>
+  </tr>
+  </tbody>
+</table>
+
+  <script type="text/javascript">
+    var rowCount = 20000;
+    var divideInto = 4;
+    var chunkSize = rowCount/divideInto;
+    var iteration = 0;
+
+    var  table = document.getElementsByTagName("tbody")[0];
+    console.log("table " + table);
+    setTimeout(function generateRows(){
+      var base = (chunkSize) * iteration;
+      console.log("base " + base);
+      for ( var i =0 ; i < chunkSize; i++ ) {
+          var tr = document.createElement("tr");
+          for (var t =0 ; t< 6; t++) {
+            var td = document.createElement("td");
+            td.appendChild( document.createTextNode((i+base) + "," + t +"," + iteration) );
+            tr.appendChild(td);
+
+          }
+          console.log("tr "  +tr);
+          table.appendChild(tr);
+      }
+      iteration++;
+      if (iteration < divideInto)
+        setTimeout(generateRows, 0);
+    }, 0);
+
+  </script>
+  </body>
+</html>

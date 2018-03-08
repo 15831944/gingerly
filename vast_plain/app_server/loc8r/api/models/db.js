@@ -38,4 +38,5 @@ process.on('SIGTERM', function(){
   });
 });
 
-require('../loc8r/api/models/locations');
+require('../models/locations');
+require('../models/users');

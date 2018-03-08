@@ -7,7 +7,8 @@
   function navigation () {
     return {
       restrict: 'EA',
-      templateUrl: '/loc8r/common/directives/navigation/navigation.template.html'
+      templateUrl: '/loc8r/common/directives/navigation/navigation.template.html',
+      controller: 'navigationCtrl as navvm'
     };
   }
 
