@@ -25,7 +25,7 @@ userSchema.methods.setPassword = function(password) {
 
 userSchema.methods.validPassword = function(password) {
   console.log("enter validPassword method");
-  var hash = crypto.pbkdf2sync(password,  this.salt, 1000, 64).toString('hex');
+  var hash = crypto.pbkdf2Sync(password,  this.salt, 1000, 64).toString('hex');
   return this.hash === hash;
 }
 userSchema.methods.generateJwt = function(){
@@ -33,7 +33,7 @@ userSchema.methods.generateJwt = function(){
   expiry.setDate(expiry.getDate() + 7);
   return jwt.sign({
     _id: this._id,
-    eamil: this.email,
+    email: this.email,
     name: this.name,
     exp: parseInt(expiry.getTime()/1000),
   }, process.env.JWT_SECRET);

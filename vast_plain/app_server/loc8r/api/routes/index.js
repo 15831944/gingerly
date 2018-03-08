@@ -29,7 +29,8 @@ router.get('/locations/:locationid/reviews/:reviewid', ctrlReviews.reviewsReadOn
 router.put('/locations/:locationid/reviews/:reviewid', auth, ctrlReviews.reviewsUpdateOne);
 router.delete('/locations/:locationid/reviews/:reviewid', auth, ctrlReviews.reviewsDeleteOne);
 
-router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
+router.post('/register', ctrlAuth.register);
+
 
 module.exports = router;

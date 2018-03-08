@@ -18,6 +18,7 @@
       var token = getToken();
       if (token) {
         var payload = JSON.parse($window.atob(token.split('.')[1]));
+        console.log("isLoggedIn payload " + payload.toString() + " exp" + payload.exp);
         return payload.exp > Date.now()/1000;
       } else{
         return false;
@@ -26,9 +27,14 @@
 
     var currentUser = function(){
       if(isLoggedIn()) {
-        console.log("currentUser is logged in");
+        console.log("==currentUser is logged in");
         var token = getToken();
+        console.log("extract payload " + token);
         var payload = JSON.parse($window.atob(token.split('.')[1]));
+        console.log("===currentUser payload " + payload.toString());
+            console.log("===email " + payload.email);
+                console.log("===currentUser name " + payload.name);
+                console.log("===current user exp " + payload.exp );
         return {
             email: payload.email,
             name: payload.name
@@ -47,6 +53,7 @@
       });
     };
     login = function(user) {
+      console.log("enter login func");
       return $http.post('/api/loc8r/login', user)
         .then(function(result, status, config, header){
           saveToken(result.data.token);
