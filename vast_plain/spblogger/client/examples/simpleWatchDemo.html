@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" ng-app="scopeApp">
+  <head>
+    <title ng-bind="title">Scope Demo</title>
+  </head>
+  <body ng-controller="SiteController">
+    <span>{{publisher}} excels in {{type}} books</span>
+    <div ng-controller="BookController">
+      <h3>Some of the popular books from {{publisher}}</h3>
+      My Wish List Count: {{WishListCount}}
+      <ul>
+        <li ng-repeat="book in books">{{book}}
+        <a href="#" ng-click="addToWishList(book)">Add to Wish List</a>
+        </li>
+      </ul>
+
+    </div>
+
+  </body>
+  <link data-require="bootstrap-css@*" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+  <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/scope_app.js"></script>
+  <script src="js/scope_controllers.js"></script>
+</html>

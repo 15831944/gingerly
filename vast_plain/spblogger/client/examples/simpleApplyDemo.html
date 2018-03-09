@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en" ng-app="applyApp">
+  <head>
+    <title ng-bind="title">Scope Demo</title>
+  </head>
+  <body ng-controller="TimeoutController">
+    <button type="button" name="button" ng-click="scheduleTask()">Get Message after 3 sec</button>
+    <button type="button" name="button" ng-click="fetchMessage()">Fetch Message after 4 sec</button>
+
+    <br/> Message got after 3 sec: {{message}}
+
+    <br/> Message fetched after 4 sec: {{message2}}
+  </body>
+  <link data-require="bootstrap-css@*" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+  <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/apply_app.js"></script>
+</html>

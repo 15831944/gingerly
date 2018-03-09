@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" ng-app="greetingApp">
+  <head>
+    <title>Greeting App</title>
+  </head>
+  <body ng-controller="GreetingController as greetingCtrl">
+
+    {{greetingCtrl.greeting}} User! The current time is <span>{{greetingCtrl.now| date:'medium'}}</span>
+    <br/>
+    <button ng-click="greetingCtrl.getRandomHelloMessage()">Random Hello Message</button>
+    <link data-require="bootstrap-css@*" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/greeting_app.js"></script>
+
+  </body>
+</html>

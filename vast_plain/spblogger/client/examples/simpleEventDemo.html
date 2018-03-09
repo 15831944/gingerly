@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" ng-app="eventApp">
+  <head>
+    <title ng-bind="title">AngularJS Event Demo</title>
+  </head>
+  <body>
+    <div ng-controller="MessageController">
+      <h4>Message: </h4>
+      <ul>
+        <li ng-repeat="message in messages">{{message.text}}</li>
+      </ul>
+      <div ng-controller="StatsController">
+        <h4>stats: </h4>
+        <div>{{messages.length}} Message(s) </div>
+        <div> Status: <span style="color:{{statusColor}}">{{status}}</span>
+        </div>
+      </div>
+    </div>
+
+  </body>
+  <link data-require="bootstrap-css@*" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+  <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/event_app.js"></script>
+  <script src="js/event_controllers.js"></script>
+</html>

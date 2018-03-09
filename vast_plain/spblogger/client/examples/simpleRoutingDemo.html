@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" ng-app="multipleViewsApp">
+  <head>
+    <title>AnularJS Routing Demo</title>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body >
+    <ul class="menu">
+      <li> <a href="#/view1">view1</a> </li>
+      <li> <a href="#/view2">view2</a> </li>
+    </ul>
+
+   <ng-view></ng-view>
+
+  </body>
+  <link data-require="bootstrap-css@*" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+  <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.3/angular-ui-router.min.js"></script>
+  <script src="js/multipleViews_app.js"></script>
+  <script src="js/multipleViews_controllers.js"></script>
+</html>
