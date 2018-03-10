@@ -21,7 +21,7 @@ var loc8rApiRoutes = require('./loc8r/api/routes/index');
 var users = require('./app_server/routes/users');
 
 var app = express();
-console.log("dir name is " + __dirname);
+//console.log("dir name is " + __dirname);
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'jade');
 
@@ -30,13 +30,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'zwu')));
 app.use(express.static(path.join(__dirname, 'loc8r/client')));
 app.use('/spblogger', express.static(path.join(__dirname, 'spblogger/client')));
 app.use(passport.initialize());
 
 //app.get('/', function (req, res) {  res.send('Hello World!')})
 //app.get('/', (req, res) =>res.send('Hello Express'));
-app.use('/', index);
+//app.use('/', index);
+app.use('/', function(req, res) {
+  res.sendFile(path.join(__dirname,'zwu' ,'index.html'));
+});
+
+
 //app.use('/loc8r', loc8rExpressRoutes);
 //app.use('/loc8r', loc8rAngularRoutes);
 app.use('/api/loc8r', loc8rApiRoutes);
