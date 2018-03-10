@@ -42,7 +42,7 @@ app.use('/', index);
 app.use('/api/loc8r', loc8rApiRoutes);
 
 app.use('/loc8r', function(req, res) {
-  res.sendFile(path.join(__dirname, 'loc8r','client', 'index.html'));
+  res.sendFile(path.join(__dirname, 'loc8r','client', 'loc8r.html'));
 });
 
 
