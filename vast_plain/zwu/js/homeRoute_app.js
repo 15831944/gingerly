@@ -18,14 +18,14 @@ uiRouteApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/list',
             templateUrl: 'partial-home-list.html',
             controller: function($scope) {
-                $scope.projects = ['Loc8r', 'Blogger', 'Tracker'];
+                $scope.projects = ['Loc8r', 'SPBlogger', 'Tracker', 'Meadowlark'];
             }
         })
 
         // nested list with just some random string data
         .state('home.paragraph', {
             url: '/paragraph',
-            template: 'Teamcenter Notes.'
+            template: '<h3><a href="https://fierce-shore-62674.herokuapp.com/">Teamcenter Notes</a>.</h3>'
         })
 
 
