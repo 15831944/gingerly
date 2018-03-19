@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'loc8r/client')));
-app.use('/spblogger', express.static(path.join(__dirname, 'spblogger/client')));
+app.use('/spblogger', express.static(path.join(__dirname, 'spblogger')));
 app.use('/home', express.static(path.join(__dirname, 'zwu')));
 app.use(passport.initialize());
 

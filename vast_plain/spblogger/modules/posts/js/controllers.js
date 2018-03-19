@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('spBlogger.posts.controllers', [])
+angular.module('spBlogger.posts.controllers', ['spBlogger.posts.services'])
   .controller('PostController',  function($scope, postService) {
     $scope.getAllPosts = function(){
       return postService.getAll();
@@ -13,6 +13,7 @@ angular.module('spBlogger.posts.controllers', [])
     $scope.closePost = function(){
       $state.go('allPosts');
     }
-    
+
     $scope.singlePost = $scope.getPostById($stateParms.id);
-  })
+
+  });

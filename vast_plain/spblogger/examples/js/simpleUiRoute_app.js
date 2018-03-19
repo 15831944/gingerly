@@ -4,8 +4,8 @@ angular.module('uiRouteApp', ['uiRouteApp.controllers', 'ui.router']);
 
 angular.module('uiRouteApp').config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/home');
-    
+    //$urlRouterProvider.otherwise('/home');
+
     $stateProvider
 
         .state('view1', {
