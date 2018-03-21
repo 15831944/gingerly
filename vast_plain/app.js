@@ -13,10 +13,12 @@ var zw_db = require ('./loc8r/api/models/db');
 var zw_passport = require('./loc8r/api/config/passport');
 var index = require('./app_server/routes/index');
 
+var spblogger_db = require ('./spblogger/api/models/db');
 
 //var loc8rExpressRoutes = require('./loc8r/server/routes/index');
 //var loc8rAngularRoutes = require('./loc8r/server/routes/main');
 var loc8rApiRoutes = require('./loc8r/api/routes/index');
+var spBloggerApiRoutes = require('./spblogger/api/routes/posts');
 
 var users = require('./app_server/routes/users');
 
@@ -41,6 +43,7 @@ app.use('/', index);
 //app.use('/loc8r', loc8rExpressRoutes);
 //app.use('/loc8r', loc8rAngularRoutes);
 app.use('/api/loc8r', loc8rApiRoutes);
+app.use('/api/spblogger', spBloggerApiRoutes);
 
 app.use('/loc8r', function(req, res) {
   res.sendFile(path.join(__dirname, 'loc8r','client', 'loc8r.html'));

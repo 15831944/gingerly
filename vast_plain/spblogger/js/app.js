@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('spBlogger',
-['spBlogger.posts', 'ui.router'
+['spBlogger.posts', 'spBlogger.admin' ,'ui.router', 'ngResource'
 ]);
 
 angular.module('spBlogger').value('version', '1.0');

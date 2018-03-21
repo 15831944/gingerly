@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" ng-app="formApp">
+  <head>
+    <title>Simple Form in AngularJS </title>
+  </head>
+  <body ng-controller="FormController">
+    <form  name="myform">
+      <input type="radio" ng-model="user.choice" value="Coffee"/> Coffee
+      <input type="radio" ng-model="user.choice" value="Expresso"/>Expresso
+      <select  name="country" ng-model="user.country" ng-options="country.id as country.desc for country in countries">
+        <option value="">Please select an option</option>
+      </select>
+
+    </form>
+    <div > selected country {{user.country}} </div>
+    <div >I love {{user.choice}}  </div>
+
+
+    <link data-require="bootstrap-css@*" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/form_app.js"></script>
+  </body>
+</html>

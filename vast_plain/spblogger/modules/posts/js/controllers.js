@@ -1,19 +1,15 @@
 'use strict'
 
-angular.module('spBlogger.posts.controllers', ['spBlogger.posts.services'])
-  .controller('PostController',  function($scope, postService) {
-    $scope.getAllPosts = function(){
-      return postService.getAll();
-    };
-    $scope.posts = $scope.getAllPosts();
-  }).controller('PostDetailsController',  function($stateParams, $state, $scope, postService){
-    $scope.getPostById = function(id) {
-      return postService.getPostById(id);
-    }
+angular.module('spBlogger.posts.controllers', ['spBlogger.admin.services'])
+  .controller('PostController',  function($scope, Post) {
+
+    $scope.posts = Post.query();
+  }).controller('PostDetailsController',  function($stateParams, $state, $scope, Post){
+
     $scope.closePost = function(){
       $state.go('allPosts');
     }
 
-    $scope.singlePost = $scope.getPostById($stateParms.id);
+    $scope.singlePost = Post.getd({id:$stateParms.id});
 
   });
