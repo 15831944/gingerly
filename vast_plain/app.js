@@ -32,6 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'front_end_devl')));
 app.use(express.static(path.join(__dirname, 'loc8r/client')));
 app.use('/spblogger', express.static(path.join(__dirname, 'spblogger')));
 app.use('/home', express.static(path.join(__dirname, 'zwu')));

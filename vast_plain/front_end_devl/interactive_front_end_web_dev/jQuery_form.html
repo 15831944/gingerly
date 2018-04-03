@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Interactive Front End Web Development</title>
+    <link rel="stylesheet" href="css/c07.css" />
+  </head>
+  <body>
+    <div id="page">
+      <h1 id="header">List King</h1>
+      <h2>Buy Groceries</h2>
+      <ul>
+        <li id="one" class="hot"><em>fresh</em> figs</li>
+        <li id="two" class="hot">pine nuts</li>
+        <li id="three" class="hot">honey</li>
+        <li id="four">balsamic vinegar</li>
+      </ul>
+      <div id="newItemButton"> <button type="button" name="button" id="showForm" href="#">new item</button>
+      </div>
+      <form id="newItemForm">
+        <input type="text" id="itemDescription" placeholder="Add description..." >
+        <input type="submit"  id="addButton" value="add">
+      </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/form_jquery.js"> </script>
+
+  </body>
+</html>

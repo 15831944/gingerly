@@ -3,8 +3,9 @@
     <span class="pull-right corss-btn" ng-click="closePost()">x</span>
     <h1>{{singlePost.title}}</h1>
     <h5>By: {{singlePost.author}} || {{singlePost.datePublished}}</h5>
-    <div class="postContent">
-      {{singlePost.content}}
+    <div class="postContent">{{singlePost.content}}</div>
+    <div class="comments">
+      <spb-comments post-instance="singlePost"></spb-comments>
     </div>
   </div>
 </div>

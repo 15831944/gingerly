@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('spBlogger.posts', ['spBlogger.posts.controllers', 'ui.router']);
+angular.module('spBlogger.posts', ['spBlogger.posts.controllers', 'spBlogger.posts.directives', 'spBlogger.admin.filters', 'ui.router']);
 
 angular.module('spBlogger.posts').config(function($stateProvider, $urlRouterProvider) {
 
@@ -13,11 +13,10 @@ angular.module('spBlogger.posts').config(function($stateProvider, $urlRouterProv
           controller: 'PostController'
         })
         .state('singlePost', {
-          url: '/posts/:id/:permalink',
+          url: '/posts/:id',
           templateUrl: 'modules/posts/views/singlePost.html',
-          contrller: 'PostDetailsController'
+          controller: 'PostDetailsController'
         });
 
         $urlRouterProvider.otherwise('/posts');
-
 });
