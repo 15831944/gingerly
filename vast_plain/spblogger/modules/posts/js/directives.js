@@ -21,6 +21,7 @@ angular.module('spBlogger.posts.directives',['spBlogger.admin.services', 'ngReso
             scope.comment={};
             console.log("singlePost " + savedPostInstance._id);
             savedPostInstance.$update();
+
           }
       },
       templateUrl: 'modules/posts/views/comments.html'

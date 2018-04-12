@@ -1,9 +1,9 @@
 'use strict'
 
-angular.module('spBlogger.admin.services', ['ngResource'])
+angular.module('spBlogger.admin.services', [])
  .factory('Post', [
       '$resource', 'API_ENDPOINT', function($resource, API_ENDPOINT) {
-        console.log("enter service factory Post");
+      //  console.log("enter service factory Post");
         return $resource(API_ENDPOINT, {id: '@_id'},{
           update: {
             method: 'PUT'

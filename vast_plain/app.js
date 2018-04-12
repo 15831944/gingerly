@@ -9,16 +9,21 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 
-var zw_db = require ('./loc8r/api/models/db');
-var zw_passport = require('./loc8r/api/config/passport');
+
+
 var index = require('./app_server/routes/index');
 
+var loc8r_db = require ('./loc8r/api/models/db');
 var spblogger_db = require ('./spblogger/api/models/db');
+var movie_db = require ('./movie/api/models/db');
+var zw_passport = require('./loc8r/api/config/passport');
+
 
 //var loc8rExpressRoutes = require('./loc8r/server/routes/index');
 //var loc8rAngularRoutes = require('./loc8r/server/routes/main');
 var loc8rApiRoutes = require('./loc8r/api/routes/index');
 var spBloggerApiRoutes = require('./spblogger/api/routes/posts');
+var movieApiRoutes = require('./movie/api/routes/index');
 
 var users = require('./app_server/routes/users');
 
@@ -35,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'front_end_devl')));
 app.use(express.static(path.join(__dirname, 'loc8r/client')));
 app.use('/spblogger', express.static(path.join(__dirname, 'spblogger')));
+app.use('/movie', express.static(path.join(__dirname, 'movie')));
 app.use('/home', express.static(path.join(__dirname, 'zwu')));
 app.use(passport.initialize());
 
@@ -45,6 +51,7 @@ app.use('/', index);
 //app.use('/loc8r', loc8rAngularRoutes);
 app.use('/api/loc8r', loc8rApiRoutes);
 app.use('/api/spblogger', spBloggerApiRoutes);
+app.use('/api/movie', movieApiRoutes);
 
 app.use('/loc8r', function(req, res) {
   res.sendFile(path.join(__dirname, 'loc8r','client', 'loc8r.html'));
