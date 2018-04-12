@@ -14,8 +14,9 @@ angular.module('spBlogger.admin.services', [])
     this.showPopup = function(message) {
       return $window.confirm(message);
     }
-  }]).value('API_ENDPOINT','http://localhost:3000/api/spblogger/posts/:id');
+  }]).value('API_ENDPOINT','https://vast-plains-29008.herokuapp.com/api/spblogger/posts/:id');
 
 /**
 **https://vast-plains-29008.herokuapp.com/api/spblogger/posts/:id
+'http://localhost:3000/api/spblogger/posts/:id'
 **/
