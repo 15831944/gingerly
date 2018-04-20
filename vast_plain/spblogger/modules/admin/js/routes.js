@@ -3,7 +3,12 @@
 angular.module('spBlogger.admin', ['spBlogger.admin.controllers', 'spBlogger.admin.services', 'spBlogger.admin.filters', 'ui.router']);
 
 angular.module('spBlogger.admin').config(['$stateProvider', function($stateProvider){
-  $stateProvider.state('admin', {
+  $stateProvider.state('login', {
+    url: '/login',
+    abstract: true,
+    controller: 'LoginController',
+    templateUrl: 'modules/admin/views/login.html'
+  }).state('admin', {
     url: '/admin',
     abstract: true,
     controller: 'AdminController',

@@ -17,7 +17,9 @@ var loc8r_db = require ('./loc8r/api/models/db');
 var spblogger_db = require ('./spblogger/api/models/db');
 var movie_db = require ('./movie/api/models/db');
 var zw_passport = require('./loc8r/api/config/passport');
+var install = require('./spblogger/api/modules/install');
 
+//install.generateAdmin();
 
 //var loc8rExpressRoutes = require('./loc8r/server/routes/index');
 //var loc8rAngularRoutes = require('./loc8r/server/routes/main');
@@ -26,6 +28,8 @@ var spBloggerApiRoutes = require('./spblogger/api/routes/posts');
 var movieApiRoutes = require('./movie/api/routes/index');
 
 var users = require('./app_server/routes/users');
+var meadowlark = require('./meadowlark/meadowlark');
+
 
 var app = express();
 //console.log("dir name is " + __dirname);
@@ -40,12 +44,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'front_end_devl')));
 app.use(express.static(path.join(__dirname, 'loc8r/client')));
 app.use('/spblogger', express.static(path.join(__dirname, 'spblogger')));
-app.use('/movie', express.static(path.join(__dirname, 'movie')));
+app.use('/movie', express.static(path.join(__dirname, 'movie/client')));
 app.use('/home', express.static(path.join(__dirname, 'zwu')));
 app.use(passport.initialize());
+app.use(passport.session());
 
 //app.get('/', function (req, res) {  res.send('Hello World!')})
 //app.get('/', (req, res) =>res.send('Hello Express'));
+
+
 app.use('/', index);
 //app.use('/loc8r', loc8rExpressRoutes);
 //app.use('/loc8r', loc8rAngularRoutes);
@@ -57,8 +64,14 @@ app.use('/loc8r', function(req, res) {
   res.sendFile(path.join(__dirname, 'loc8r','client', 'loc8r.html'));
 });
 
-
 app.use('/users', users);
+
+//meadowlark using node and express
+var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
+
+app.use('/meadowlark', meadowlark);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

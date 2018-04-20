@@ -1,3 +1,3 @@
 module.exports.index = function(req, res) {
-  res.render('index', {title: 'Wu Home'});
+  res.render('index.jade', {title: 'Wu Home'});
 };

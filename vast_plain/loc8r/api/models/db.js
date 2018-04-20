@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 // LOCAL DB
-//var dbURI = 'mongodb://localhost/Loc8r';
-var dbURI = 'mongodb://heroku_wgjnlstq:xibm145@ds133331.mlab.com:33331/heroku_wgjnlstq';
+var dbURI = 'mongodb://localhost/Loc8r';
+//var dbURI = 'mongodb://heroku_wgjnlstq:xibm145@ds133331.mlab.com:33331/heroku_wgjnlstq';
 //LIVE DB
 if (process.env.NODE_ENV === 'production') {
   dbURI = 'mongodb://heroku_wgjnlstq:xibm145@ds133331.mlab.com:33331/heroku_wgjnlstq';

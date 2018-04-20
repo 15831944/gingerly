@@ -7,7 +7,7 @@ var ctrlOthers = require('../controllers/others');
 router.get('/', ctrlMain.index);
 
 router.get('/helloworld', function(req, res ) {
-  res.render('helloworld', { title: 'Hello' });
+  res.render('helloworld.jade', { title: 'Hello' });
 });
 
 router.get('/about', ctrlOthers.about);
