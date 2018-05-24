@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="simpleApp">
+  <head>
+    <title>JavaScript &amp; jQuery - Chapter 9: APIs - Simple Angular Example</title>
+    <link rel="stylesheet" href="css/c09.css" />
+    <link rel="stylesheet" href="css/pepper-grinder/jquery-ui-1.10.3.custom.min.css">
+  </head>
+  <body>
+    <header> <h1>THE MAKER BUS</h1> </header>
+    <h2>Session Times</h2>
+    <div class="third"> <img src="img/toys1.jpg" alt="Circuit Boards"> </div>
+    <div class="two-thirds" id="timetable">
+      <table ng-controller="TimetableCtrl">
+        <tr> <th>time</th> <th>title</th> <th>detail</th> </tr>
+        <tr ng-repeat="session in sessions">
+          <td>{{session.time}}</td>
+          <td>{{session.title}}</td>
+          <td>{{session.detail}}</td>
+        </tr>
+
+      </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   crossorigin="anonymous"></script>
+    <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="js/angular-extern.js"></script>
+  </body>
+</html>

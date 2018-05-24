@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 
-
+var credentials = require('./meadowlark/js/credentials.js');
 
 var index = require('./app_server/routes/index');
 
@@ -33,7 +33,8 @@ var meadowlark = require('./meadowlark/meadowlark');
 
 var app = express();
 //console.log("dir name is " + __dirname);
-app.set('views', path.join(__dirname, 'app_server', 'views'));
+//app.set('views', [ path.join(__dirname, 'meadowlark', 'views'), path.join(__dirname, 'app_server', 'views') ]);
+app.set('views',  path.join(__dirname, 'app_server', 'views') );
 app.set('view engine', 'jade');
 
 app.use(logger('dev'));
@@ -49,6 +50,11 @@ app.use('/home', express.static(path.join(__dirname, 'zwu')));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(require('express-session')({
+  resave: false,
+  saveUninitialized: false,
+  secret: credentials.cookieSecret,
+}));
 //app.get('/', function (req, res) {  res.send('Hello World!')})
 //app.get('/', (req, res) =>res.send('Hello Express'));
 
@@ -67,7 +73,20 @@ app.use('/loc8r', function(req, res) {
 app.use('/users', users);
 
 //meadowlark using node and express
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+
+var handlebars = require('express-handlebars').create({
+  defaultLayout:'main',
+  layoutsDir: 'app_server/views/meadowlark/layouts',
+  partialsDir: 'app_server/views/meadowlark/partials',
+  helpers: {
+    section: function(name, options) {
+      if (!this._sections) this._sections = {};
+      this._sections[name] = options.fn(this);
+      return null;
+    }
+  }
+});
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 

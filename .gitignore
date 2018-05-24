@@ -10,13 +10,13 @@ favicon.ico
 *.lock
 
 lib
-images
 bin
 tests
 vendor
 dist
 tmp
 jquery-3.2.1.min.js
+bootstrap.min.css
 
 robots.txt
 .sass-cache

@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <title>Meadowlark Travel</title>
+    {{{_sections.head}}}
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
+</head>
+<body>
+  <header><img src="/images/logo.png" alt="Meadowlark Travel Logo"></header>
+  <div class="container">
+    {{#if flash}}
+      <div class="alert alert-dismissible alert-{{flash.type}}">
+        <button type="button" class="close" data-dismss="alert" aria-hidden="true" >&times;</button>
+        <strong>{{flash.intro}}</strong>{{{flash.message}}}
+      </div>
+      {{/if}}
+
+
+      {{{body}}}
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+      {{{_sections.jquery}}}
+      <footer>&copy; Meadowlark Travel 2018</footer>
+  </div>
+
+</body>
+</html>

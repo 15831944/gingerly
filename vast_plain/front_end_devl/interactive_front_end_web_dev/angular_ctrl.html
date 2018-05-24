@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="mpleApp">
+  <head>
+    <title>JavaScript &amp; jQuery - Chapter 9: APIs - Simple Angular Example</title>
+    <link rel="stylesheet" href="css/c09.css" />
+    <link rel="stylesheet" href="css/pepper-grinder/jquery-ui-1.10.3.custom.min.css">
+  </head>
+  <body>
+    <header> <h1>THE MAKER BUS</h1> </header>
+    <h2>Buy Tickets</h2>
+    <div class="third"> <img src="img/toys1.jpg" alt="Circuit Boards"> </div>
+    <div class="two-thirds">
+      <table ng-controller="BasketCtrl">
+        <tr> <td>Items</td> <td>{{description}}</td> </tr>
+        <tr> <td>Cost</td> <td>{{cost}}</td> </tr>
+        <tr> <td>Qty</td> <td> <input type="number" ng-model="qty">  </td> </tr>
+        <tr> <td>Subtotal</td> <td>{{qty * cost | currency}}</td> </tr>
+      </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   crossorigin="anonymous"></script>
+    <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    <script src="js/angular-controller.js"></script>
+  </body>
+</html>
