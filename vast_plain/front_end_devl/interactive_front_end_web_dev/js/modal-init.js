@@ -4,7 +4,7 @@
   $('#share').on('click', function(){
     modal.open({
       content: $content,
-      width: 240,
+      width: 340,
       height: 300
     });
   });

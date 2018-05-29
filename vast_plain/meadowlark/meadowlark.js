@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var path = require('path');
 
-var formidable = require('formidable');
-var fortune = require('./js/fortune.js');
+
 var weather = require('./js/weather.js');
 var cartValidation = require('./js/cartValidation.js');
-var fs = require('fs');
+
 var Vacation = require('./model/vacation.js');
 var VacationInSeasonListener = require('./model/vacationInSeasonListener.js');
 
@@ -107,164 +105,10 @@ admin.get('/users', function(req, res){
   res.render('/meadowlark/admin/users');
 });
 
-
-router.get('/', function(req, res ) {
-  //res.type('text/plain');
-  //res.send('Meadowlark Travel');
-  res.render('meadowlark/meadowlark_home.handlebars');
-});
-
-router.get('/about', function(req, res ) {
-  //res.type('text/plain');
-  //res.send('About Meadowlark Travel');
-  res.render('meadowlark/about.handlebars', {fortune: fortune.getFortune()});
-});
-
-router.get('/nursery-rhyme', function(req, res ) {
-  //res.type('text/plain');
-  //res.send('About Meadowlark Travel');
-  res.render('meadowlark/nursery-rhyme.handlebars', {fortune: fortune.getFortune()});
-});
-
-router.get('/data/nursery-rhyme', function(req, res ) {
-  //res.type('text/plain');
-  //res.send('About Meadowlark Travel');
-  res.json({
-    animal: 'squirrel',
-    bodyPart: 'tail',
-    adjective: 'bushy',
-    noun: 'heck',
-  });
-});
+require('./routes.js')(router);
 
 
-router.get('/tours/request-group-rate', function(req, res ) {
-  //res.type('text/plain');
-  //res.send('About Meadowlark Travel');
-  res.render('meadowlark/tours/request-group-rate.handlebars', {fortune: fortune.getFortune()});
-});
 
-router.get('/thank-you', function(req, res){
-  res.render('meadowlark/thank-you.handlebars');
-});
-
-router.get('/newsletter', function(req, res) {
-  res.render('meadowlark/newsletter.handlebars', {csrf: "CSRF tokens goes here"});
-});
-
-var VALID_EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
-function NewsletterSignup(){
-}
-NewsletterSignup.prototype.save = function(cb){
-	cb();
-};
-
-//mockup product db -
-function Product() {
-
-}
-
-Product.find = function(conditions, fields, options, cb) {
-  if (typeof conditions === 'function') {
-    cb = conditions;
-    conditions = {};
-    fields = null;
-    options={};
-  } else if (typeof fields === 'function') {
-    cb=fileds;
-    fields = null;
-    options={};
-  } else if (typeof options === 'function') {
-    cb = options;
-    options = {};
-  }
-
-  var products = [
-      {
-    			name: 'Hood River Tour',
-    			slug: 'hood-river',
-    			category: 'tour',
-    			maximumGuests: 15,
-    			sku: 723,
-    		},
-    		{
-    			name: 'Oregon Coast Tour',
-    			slug: 'oregon-coast',
-    			category: 'tour',
-    			maximumGuests: 10,
-    			sku: 446,
-    		},
-    		{
-    			name: 'Rock Climbing in Bend',
-    			slug: 'rock-climbing/bend',
-    			category: 'adventure',
-    			requiresWaiver: true,
-    			maximumGuests: 4,
-    			sku: 944,
-    		}
-  ];
-
-  cb(null, products.filter(function(p){
-    if (conditions.category && p.category!==conditions.category) return false;
-    if (conditions.slug && p.slug !== conidtions.slug) return false;
-    if (isFinite(conditions.sku) && p.sku !==Number(conditions.sku)) return false;
-    return true;
-  }));
-
-};
-
-Product.findOne = function(conditions, fields, options,cb) {
-  if(typeof conditions==='function') {
-		cb = conditions;
-		conditions = {};
-		fields = null;
-		options = {};
-	} else if(typeof fields==='function') {
-		cb = fields;
-		fields = null;
-		options = {};
-	} else if(typeof options==='function') {
-		cb = options;
-		options = {};
-	}
-  Product.find(conditions, fields, options, function(err, products) {
-    cb(err, products && products.length? products[0]: null);
-  });
-};
-
-router.post('/newsletter', function(req, res) {
-  console.log("enter newsleter post");
-  var name = req.body.name || '';
-  var email = req.body.email || '';
-  if (!email.match(VALID_EMAIL_REGEX)) {
-    req.session.flash = {
-      type: 'danger',
-      intro: 'validation error!',
-      message: ' The email address was not valid.'
-    };
-    return res.redirect(303, '/meadowlark/newsletter/archive');
-  }
-
-  new NewsletterSignup({name: name, email:email}).save(function(err){
-    if(err) {
-      if(req.xhr) return res.json({error: 'database error.'});
-      req.session.flash = {
-        type: 'danger',
-        intro: 'Database Error',
-        message: 'There was a database error, please try again'
-      };
-      return res.redirect(303, '/meadowlark/newsletter/archive');
-    }
-    if (req.xhr) return res.json({success: true});
-    req.session.flash = {
-      type: 'success',
-      intro: 'THank you.',
-      message: 'You have now signed up for the newsletter'
-
-    }
-    return res.redirect(303, '/meadowlark/newsletter/archive');
-  });
-});
 
 router.post('/process', function(req, res) {
   console.log('Form (from querystring):' + req.query.form);
@@ -278,101 +122,10 @@ router.post('/process', function(req, res) {
   }
 });
 
-router.get('/newsletter/archive', function(req, res) {
-    res.render('meadowlark/newsletter/archive.handlebars');
-});
 
-router.get('/contest/vacation-photo', function(req, res) {
-  var now = new Date();
-  res.render('meadowlark/contest/vacation-photo.handlebars', {
-    year: now.getFullYear(),
-    month: now.getMonth()
-  });
-});
 
-var dataDir = __dirname+'/data';
-var vacationPhotoDir =dataDir + 'vacation-photo';
-if(!fs.existsSync(dataDir)) fs.mkdirSync(dataDir);
-if(!fs.existsSync(vacationPhotoDir)) fs.mkdirSync(vacationPhotoDir);
 
-function saveContestEntry(contestName, email, year, month, photoPath) {
-  //to do later
-}
-
-router.post('/contest/vacation-photo/:year/:month', function(){
-  var form = new formidable.IncomingForm();
-  form.parse(req, function(err, fields, files) {
-    console.log('received fields:');
-    console.log(fields);
-    console.log('received files:');
-    console.log(files);
-    if (err) return res.redirect(303, 'error');
-    if (err) {
-      req.session.flash = {
-        type: 'danger',
-        intro: 'Oops',
-        message: 'There was an error processing your submission.' + 
-        ' Please try again.',
-      };
-      return res.redirect(303, '/meadowlark/contest/vacation-photo');
-    }
-
-    var photo = files.photo;
-    var dir = vacationPhotoDir + '/' + Date.now();
-    var path = dir + '/' + photo.name;
-    fs.mkdirSync(dir);
-    fs.renameSync(photo.path, dir+'/' + photo.name);
-    saveContestEntry('vacation-photo', field.email, req.params.year, req.params.month, path);
-    req.session.flash = {
-      type: 'success',
-      intro: 'good luck',
-      message: 'you have entered into the contest.',
-    };
-
-    return res.redirect(303, '/meadowlark/contest/vacation-photo/entries');
-    //res.redirect(303, '/meadowlark/thank-you');
-  });
-});
-
-router.get('/contest/vacation-photo/entries', function(req, res) {
-  res.render('meadowlark/contest/vacation-photo/entries');
-});
-
-function convertFromUSD(value, currency) {
-  switch(currency) {
-    case 'USD': return value * 1 ;
-    case 'GBP': return value * 0.6;
-    case 'BTC': return value * 0.00237079;
-    default: return NaN;
-  }
-}
-
-router.get('/vacations', function(req, res) {
-  console.log("enter vacations routing");
-  Vacation.find({available: true}, function(err, vacations){
-    var currency = req.session.currency || 'USD';
-    var context = {
-      currency: currency,
-      vacations: vacations.map(function(vacation){
-        return {
-          sku: vacation.sku,
-          name: vacation.name,
-          description: vacation.description,
-          inSeason: vacation.inSeason,
-          price: convertFromUSD(vacation.priceInCents/100, currency),
-          qty: vacation.qty,
-        } ;
-      })
-    };
-    switch (currency) {
-      case 'USD' : context.currencyUSD = 'selected'; break;
-      case 'GBP' : context.currencyGBP = 'selected'; break;
-      case 'BTC' : context.currencyBTC = 'selected'; break;
-    }
-    res.render('meadowlark/vacations.handlebars', context);
-  });
-});
-
+/** 
 router.get('/tours/:tour', function(req, res, next) {
   Product.findOne({
     category: 'tour',
@@ -394,123 +147,14 @@ router.get('adventures/:subcat/:name' , function(req, res, next) {
     res.render('meadowlark/adventure.handlebars', {adventure: adventure});
   });
 });
+**/
 
-router.use(cartValidation.checkWaivers);
-router.use(cartValidation.checkGuestCounts);
+//router.use(cartValidation.checkWaivers);
+//router.use(cartValidation.checkGuestCounts);
 
-router.get('/cart/add', function(req, res, next) {
-  console.log("enter cart add  get");
-  console.log("sku ==" + req.query.sku);
-  
-  var cart = req.session.cart || (req.session.cart = {items: []});
-  console.log("cart is " + cart);
-  Vacation.findOne({
-    sku: req.query.sku
-  }, function(err, vacation){
-    if(err) return next(err);
-    if(!vacation) return next(new Error('Unknown product SKU: ' + req.query.sku));
-    console.log("adding it to cart items"); 
-    cart.items.push({
-      vacation: vacation,
-      guests: req.body.guests || 1,
-    });
-    console.log("redirect to cart" +cart.items.length);
-    res.redirect(303, '/meadowlark/cart');
-  });
+var autoViews = {};
 
-});
-router.post('/cart/add', function(req, res, next) {
-  console.log("enter cart add  post");
-  console.log("sku -- " + req.body.sku);
-  console.log("cart in session " +  req.session.cart);
-  var cart = req.session.cart || (req.session.cart = {items: []});
-  console.log("cart is " + cart);
-  Vacation.findOne({
-    sku: req.body.sku
-  }, function(err, vacation){
-    if(err) return next(err);
-    if(!vacation) return next(new Error('Unknown product SKU: ' + req.body.sku));
-    console.log("adding it to cart items");
-    cart.items.push({
-      vacation: vacation,
-      guests: req.body.guests || 1,
-    });
-    console.log("redirect to cart" +cart.items.length);
-    res.redirect(303, '/meadowlark/cart');
-  });
-});
 
-router.get('/cart', function(req, res) {
-  console.log("enter cart");
-  var cart = req.session.cart ;
-  console.log("redirect to cart-" +cart.items.length);
-  res.render('meadowlark/cart.handlebars', {cart: cart});
-})
-
-router.get('/cart/checkout', function(req, res, next) {
-  var cart = req.session.cart;
-  if (!cart)  next();
-  res.render('meadowlark/cart-checkout');
-});
-
-router.get('/cart/thank-you', function(req, res) {
-  res.render('meadowlark/cart-thank-you', {cart: req.session.cart});
-});
-router.get('/email/cart/thank-you', function(req, res) {
-  res.render('meadowlark/eamil/cart-thank-you');
-});
-
-router.post('/cart/checkout', function(req, res, next) {
-  var cart = req.session.cart;
-  if (!cart)  next(new Error('cart does not exist'));
-  var name = req.body.name || '';
-  var email = req.body.email || '';
-  if (!email.match(VALID_EMAIL_REGEX)) return res.next(new Error('invalid email address.'));
-  cart.number = Math.random().toString().replace(/^0\.0*/, '');
-  cart.billing = {
-    name: name,
-    email: email,
-  };
-  res.render('meadowlark/eamil/cart-thank-you', {
-    layout: null,
-    cart: cart
-  }, function(err, html) {
-    if (err) console.log('error in eamil template');
-    eamilService.send(cart.billing.email, 'Thank you for booking with Meadowlark Travel', html);
-
-  });
-
-  res.render('meadowlark/cart-thank-you');
-});
-
-router.get('/notify-me-when-in-season', function(req, res) {
-  res.render('meadowlark/notify-me-when-in-season', {sku: req.query.sku});
-});
-
-router.post('/notify-me-when-in-season', function(req, res) {
-  VacationInSeasonListener.update(
-    {email: req.body.email},
-    {$push: {skus: req.body.sku}},
-    {upsert: true},
-    function(err){
-      if(err) {
-        console.error(err.stack);
-        req.session.flash = {
-          type: 'danger',
-          intro: 'Ooops',
-          messsage: 'There was an error processing your request.',
-        };
-        return res.redirect(303, '/meadowlark/vacations');
-      }
-      req.session.flash = {
-        type: 'success',
-        intro: 'Thank you!',
-        message: 'You will be notifed when this vacation is in season.',
-      };
-      return res.redirect(303, '/meadowlark/vacations');
-    }
-  );
-});
 
 
 //404 error catch all handler

@@ -23,8 +23,8 @@ var modal = (function() {  //declare modal obj
         left: left + $window.scrollLeft()
       });
     },
-    open: function() {
-      console.log("enter open func");
+    open: function(settings) {
+      console.log("enter open func" + settings.content);
       $content.empty().append(settings.content);
       $modal.css({
         width: settings.width || 'auto',
